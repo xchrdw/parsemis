@@ -1,13 +1,13 @@
 /**
  * created May 19, 2006
- * 
+ *
  * @by Marc Woerlein (woerlein@informatik.uni-erlangen.de)
  *
  * Copyright 2006 Marc Woerlein
- * 
+ *
  * This file is part of parsemis.
  *
- * Licence: 
+ * Licence:
  *  LGPL: http://www.gnu.org/licenses/lgpl.html
  *   EPL: http://www.eclipse.org/org/documents/epl-v10.php
  *   See the LICENSE file in the project's top-level directory for details.
@@ -40,9 +40,9 @@ import de.parsemis.utils.Generic;
 /**
  * This class is for locally storing all final settings, the database and the
  * corresponding relabeling functions.
- * 
+ *
  * @author Marc Woerlein (woerlein@informatik.uni-erlangen.de)
- * 
+ *
  * @param <NodeType>
  *            the type of the node labels (will be hashed and checked with
  *            .equals(..))
@@ -55,29 +55,16 @@ public class LocalEnvironment<NodeType, EdgeType> implements
 		Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
 	@SuppressWarnings("unchecked")
 	public transient static LocalEnvironment environ;
 
-	private static long CLK_TICKS = 100;
-
-	static {
-		try {
-			System.loadLibrary("java-time");
-			CLK_TICKS = getClockTicks();
-		} catch (final UnsatisfiedLinkError e) {
-			if (VERBOSE) {
-				System.err.println("ignored: " + e);
-			}
-		}
-	}
-
 	/**
 	 * creates and sets the local environment
-	 * 
+	 *
 	 * @param <NodeType>
 	 * @param <EdgeType>
 	 * @param settings
@@ -94,7 +81,7 @@ public class LocalEnvironment<NodeType, EdgeType> implements
 
 	/**
 	 * creates and sets the local environment
-	 * 
+	 *
 	 * @param <NodeType>
 	 * @param <EdgeType>
 	 * @param settings
@@ -125,7 +112,7 @@ public class LocalEnvironment<NodeType, EdgeType> implements
 
 	/**
 	 * creates and sets the local environment
-	 * 
+	 *
 	 * @param <NodeType>
 	 * @param <EdgeType>
 	 * @param settings
@@ -146,11 +133,7 @@ public class LocalEnvironment<NodeType, EdgeType> implements
 	 * @return the current CPU-time of the java process
 	 */
 	public static long currentCPUMillis() {
-		try {
-			return (getCPUtime() * 1000) / CLK_TICKS;
-		} catch (final UnsatisfiedLinkError e) {
-			return System.currentTimeMillis();
-		}
+        return System.nanoTime() / 1000;
 	}
 
 	/**
@@ -173,7 +156,7 @@ public class LocalEnvironment<NodeType, EdgeType> implements
 	/**
 	 * sets the local environment to the given one used to initialize the local
 	 * environments on remote machines of the JavaParty environment
-	 * 
+	 *
 	 * @param env
 	 * @param <NodeType>
 	 *            the type of the node labels
@@ -343,7 +326,7 @@ public class LocalEnvironment<NodeType, EdgeType> implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.parsemis.utils.Relabler#getEdgeLabel(int)
 	 */
 	public EdgeType getEdgeLabel(final int idx) {
@@ -352,7 +335,7 @@ public class LocalEnvironment<NodeType, EdgeType> implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.parsemis.utils.Relabler#getEdgeLabelIndex(null)
 	 */
 	public int getEdgeLabelIndex(final EdgeType edge) {
@@ -361,7 +344,7 @@ public class LocalEnvironment<NodeType, EdgeType> implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.parsemis.utils.GraphEnvironment#getGraph(int)
 	 */
 	public DataBaseGraph<NodeType, EdgeType> getGraph(final int idx) {
@@ -373,7 +356,7 @@ public class LocalEnvironment<NodeType, EdgeType> implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.parsemis.utils.Relabler#getNodeLabel(int)
 	 */
 	public NodeType getNodeLabel(final int idx) {
@@ -382,7 +365,7 @@ public class LocalEnvironment<NodeType, EdgeType> implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.parsemis.utils.Relabler#getNodeLabelIndex(null)
 	 */
 	public int getNodeLabelIndex(final NodeType node) {
@@ -427,7 +410,7 @@ public class LocalEnvironment<NodeType, EdgeType> implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.parsemis.utils.GraphEnvironment#graphCount()
 	 */
 	public int graphCount() {
@@ -458,7 +441,7 @@ public class LocalEnvironment<NodeType, EdgeType> implements
 
 	/**
 	 * insert a database graph at the given index
-	 * 
+	 *
 	 * @param idx
 	 * @param graph
 	 */
@@ -469,7 +452,7 @@ public class LocalEnvironment<NodeType, EdgeType> implements
 
 	/**
 	 * adds a post mining filter
-	 * 
+	 *
 	 * @param filter
 	 * @return the previously set filter
 	 */
@@ -487,7 +470,7 @@ public class LocalEnvironment<NodeType, EdgeType> implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
